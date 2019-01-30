@@ -20,7 +20,7 @@ log = open("/log/" + time + ".log", "w")
 # read the config file
 Token = config.get('BotConfig', 'Token')
 ownerID = config.get('BotConfig', 'ownerID')
-prefix = config.get('BotConfig', 'prefix')
+prefix = config.get('BotConfig', 'default_prefix')
 Token = Token[1:len(Token)-1]
 ownerID = ownerID[1:len(ownerID)-1]
 adminID = "531927224840880141"
