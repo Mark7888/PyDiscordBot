@@ -5,6 +5,6 @@ settings
 enablecommand
 disablecommand
 say
-clear
+clean
 reload
 stopbot
