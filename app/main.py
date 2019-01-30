@@ -9,13 +9,13 @@ from configparser import ConfigParser
 init(autoreset=True)
 client = discord.Client()
 config = ConfigParser()
-config.read('../config/config.ini')
+config.read('/config/config.ini')
 
 # log
 time = str(datetime.datetime.now())
 time = time[:len(time)-7]
 logtime = str(time[len(time)-8:])
-log = open("../log/" + time + ".log", "w")
+log = open("/log/" + time + ".log", "w")
 
 # read the config file
 Token = config.get('BotConfig', 'Token')
@@ -32,15 +32,15 @@ consol_prefix = Fore.YELLOW + Back.RED + Style.BRIGHT + "console" + Back.RESET +
 server_prefix = Fore.GREEN + "[Server]: " + Fore.RESET
 
 # read the command's list
-commandfile = open("../config/commands.list", "r+")
+commandfile = open("/config/commands.list", "r+")
 commandlist = commandfile.read().split(" ")
 
 # open status file
 try:
-    stat = open("../config/status.file", "r+")
+    stat = open("/config/status.file", "r+")
 except:
-    stat = open("../config/status.file", "w").close()
-    stat = open("../config/status.file", "r+")
+    stat = open("/config/status.file", "w").close()
+    stat = open("/config/status.file", "r+")
 
 # It runs if the bot is ready
 @client.event
@@ -48,7 +48,7 @@ async def on_ready():
     if stat.read() == "RESTART":
         print(consol_prefix + "Reload completed.")
         stat.close()
-        open("../config/status.file", "w").close()
+        open("/config/status.file", "w").close()
     else:
         print('\n' + Fore.GREEN + "Logged in as:")
         print(Fore.CYAN + client.user.name + " <" + client.user.id + ">")
@@ -63,10 +63,10 @@ async def on_message(message):
     if message.author == client.user:
         return
     try:
-        scl = open("../servers/" + message.server.id + "command.list", "r+")
+        scl = open("/servers/" + message.server.id + "command.list", "r+")
     except:
-        open("../servers/" + message.server.id + "command.list", "w").close()
-        scl = open("../servers/" + message.server.id + "command.list", "r+")
+        open("/servers/" + message.server.id + "command.list", "w").close()
+        scl = open("/servers/" + message.server.id + "command.list", "r+")
 
     if message.content.startswith(prefix):
         msgargs = message.content[1:].split(" ")
