@@ -71,8 +71,8 @@ async def on_message(message):
     if message.content.startswith(prefix):
         msgargs = message.content[1:].split(" ")
         if msgargs[0] in commandlist:
-            #ocommand(message, msgargs, prefix, ownerID, adminID, consol_prefix)
-        elif msgargs[0] in scl:
+            ocommand(message, msgargs, prefix, ownerID, adminID, consol_prefix)
+        #elif msgargs[0] in scl:
             #scommand(message, msgargs, prefix, adminID)
 
 client.run(Token)
