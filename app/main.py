@@ -1,4 +1,5 @@
 from ocommands import ocommand
+from configcheck import configcheck
 #from scommands import scommand
 import datetime
 from subprocess import call
@@ -8,8 +9,12 @@ import discord
 from configparser import ConfigParser
 init(autoreset=True)
 client = discord.Client()
-config = ConfigParser()
-config.read('/config/config.ini')
+
+# set cmd prefixes
+log_prefix = Fore.MAGENTA + "log - " + Fore.RESET
+consol_prefix = Fore.YELLOW + Back.RED + Style.BRIGHT + "console" + Back.RESET + " - " + Style.RESET_ALL
+warn_prefix = Fore.YELLOW + Back.RED + Style.BRIGHT + "WARN" + Style.RESET_ALL + " - "
+server_prefix = Fore.GREEN + "[Server]: " + Fore.RESET
 
 # log
 time = str(datetime.datetime.now())
@@ -17,7 +22,13 @@ time = time[:len(time)-7]
 logtime = str(time[len(time)-8:])
 log = open("/log/" + time + ".log", "w")
 
+# check the config file
+configcheck(warn_prefix)
+
 # read the config file
+config = ConfigParser()
+config.read('/config/config.ini')
+
 Token = config.get('BotConfig', 'Token')
 ownerID = config.get('BotConfig', 'ownerID')
 prefix = config.get('BotConfig', 'default_prefix')
@@ -25,11 +36,6 @@ Token = Token[1:len(Token)-1]
 ownerID = ownerID[1:len(ownerID)-1]
 adminID = "531927224840880141"
 prefix = prefix[1:len(prefix)-1]
-
-# set cmd prefixes
-log_prefix = Fore.MAGENTA + "log - " + Fore.RESET
-consol_prefix = Fore.YELLOW + Back.RED + Style.BRIGHT + "console" + Back.RESET + " - " + Style.RESET_ALL
-server_prefix = Fore.GREEN + "[Server]: " + Fore.RESET
 
 # read the command's list
 commandfile = open("/config/commands.list", "r+")
