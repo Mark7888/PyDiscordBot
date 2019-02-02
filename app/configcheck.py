@@ -1,3 +1,4 @@
+from configparser import ConfigParser
 def configcheck(warn_prefix):
     try:
         open('../config/config.ini', "r").close()
