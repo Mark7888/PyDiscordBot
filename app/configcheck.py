@@ -10,9 +10,9 @@ def configcheck(warn_prefix):
     except:
         file = open('../config/config.ini', "w")
         file.write('''[BotConfig]
-        Token: ""
-        ownerID: ""
-        default_prefix: ""''')
+Token: ""
+ownerID: ""
+default_prefix: ""''')
         file.close()
 
         print(warn_prefix + "The Config file was created in the 'config' folder.")
