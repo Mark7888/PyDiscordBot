@@ -16,12 +16,6 @@ consol_prefix = Fore.YELLOW + Back.RED + Style.BRIGHT + "console" + Back.RESET +
 warn_prefix = Fore.YELLOW + Back.RED + Style.BRIGHT + "WARN" + Style.RESET_ALL + " - "
 server_prefix = Fore.GREEN + "[Server]: " + Fore.RESET
 
-# log
-time = str(datetime.datetime.now())
-time = time[:len(time)-7]
-logtime = str(time[len(time)-8:])
-log = open("../log/" + time + ".log", "w")
-
 # check the config file
 configcheck(warn_prefix)
 
