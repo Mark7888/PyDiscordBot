@@ -32,7 +32,10 @@ try:
     prefix = prefix[1:len(prefix)-1]
 except:
     print(warn_prefix + "Please check the config file in the 'config' folder!")
-
+    exit()
+if Token or ownerID or prefix == "":
+    print(warn_prefix + "Please check the config file in the 'config' folder!")
+    exit()
 # read the command's list
 commandfile = open("../config/commands.list", "r+")
 commandlist = commandfile.read().split(" ")
