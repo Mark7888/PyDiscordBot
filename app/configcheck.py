@@ -2,7 +2,7 @@ from configparser import ConfigParser
 config = ConfigParser()
 def configcheck(warn_prefix):
     try:
-        file = open('../config/config.ini', "r").close()
+        file = open('../config/config.ini', "r")
         config.read(file)
         config.get('BotConfig','Token')
 
