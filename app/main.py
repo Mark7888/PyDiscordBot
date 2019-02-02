@@ -23,8 +23,8 @@ configcheck(warn_prefix)
 config = ConfigParser()
 config.read('../config/config.ini')
 try:
-    Token = config.get('BotConfig', 'Token')
-    ownerID = config.get('BotConfig', 'ownerID')
+    Token = config.get('BotConfig', 'token')
+    ownerID = config.get('BotConfig', 'ownerid')
     prefix = config.get('BotConfig', 'default_prefix')
     Token = Token[1:len(Token)-1]
     ownerID = ownerID[1:len(ownerID)-1]
