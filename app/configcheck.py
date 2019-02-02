@@ -1,5 +1,3 @@
-from configcheck import configcheck
-
 def configcheck(warn_prefix):
     try:
         open('/config/config.ini', "r").close()
