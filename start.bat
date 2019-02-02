@@ -1,1 +1,2 @@
-python3 start.py
+cd app
+python3 main.py
