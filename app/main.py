@@ -22,14 +22,16 @@ configcheck(warn_prefix)
 # read the config file
 config = ConfigParser()
 config.read('../config/config.ini')
-
-Token = config.get('BotConfig', 'Token')
-ownerID = config.get('BotConfig', 'ownerID')
-prefix = config.get('BotConfig', 'default_prefix')
-Token = Token[1:len(Token)-1]
-ownerID = ownerID[1:len(ownerID)-1]
-adminID = "531927224840880141"
-prefix = prefix[1:len(prefix)-1]
+try:
+    Token = config.get('BotConfig', 'Token')
+    ownerID = config.get('BotConfig', 'ownerID')
+    prefix = config.get('BotConfig', 'default_prefix')
+    Token = Token[1:len(Token)-1]
+    ownerID = ownerID[1:len(ownerID)-1]
+    adminID = "531927224840880141"
+    prefix = prefix[1:len(prefix)-1]
+except:
+    print(warn_prefix + "Please check the config file in the 'config' folder!")
 
 # read the command's list
 commandfile = open("../config/commands.list", "r+")
