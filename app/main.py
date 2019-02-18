@@ -2,7 +2,6 @@ from ocommands import ocommand
 from configcheck import configcheck
 from scommands import scommand
 from log import log
-from subprocess import call
 from os import makedirs, path
 from colorama import Fore, Back, Style
 from colorama import init
@@ -70,12 +69,12 @@ async def on_message(message):
     # create server folder
     if not path.exists("../servers/" + message.server.id):
         makedirs("../servers/" + message.server.id)
+
     if not path.exists("../servers/" + message.server.id + "/command.list"):
         open("../servers/" + message.server.id + "/command.list", "w").close()
     scl = open("../servers/" + message.server.id + "/command.list", "r+")
     scls = scl.read().split(" ")
 
-    # create server files
     if not path.exists("../servers/" + message.server.id + "/serverconfig.ini"):
         serverconfig = open("../servers/" + message.server.id + "/serverconfig.ini", "w")
         serverconfig.write('''[Config]\nprefix = ''' + prefix + '''\nlang = EN''')
@@ -107,7 +106,7 @@ async def on_message(message):
             return
         msgargs = message.content[1:].split(" ")
         if msgargs[0].upper() in commandlist:
-            msg = ocommand(message, sprefix, ownerID, consol_prefix, log_prefix, client)
+            msg = ocommand(message, sprefix, prefix, ownerID, consol_prefix, log_prefix, client)
             if msg == "clean":
                 def is_me(m):
                         return m.author == client.user
