@@ -1,4 +1,6 @@
 from ocommands import ocommand
+from reload import reload
+from pyhelp import pyhelp
 from configcheck import configcheck
 from scommands import scommand
 from log import log
@@ -55,7 +57,7 @@ async def on_ready():
         print(Fore.GREEN + "---------------------------")
         print('\n' + Fore.RESET)
         stat.close()
-    await client.change_presence(game=discord.Game(name='Type |pyhelp| for more information'))
+    await client.change_presence(game=discord.Game(name='Type |' + prefix + 'pyhelp| for more information'))
 
 # It runs if the bot get a message
 @client.event
@@ -66,14 +68,15 @@ async def on_message(message):
     # checks is the message in private
     if message.channel.is_private:
         return
+
     # create server folder
     if not path.exists("../servers/" + message.server.id):
         makedirs("../servers/" + message.server.id)
 
     if not path.exists("../servers/" + message.server.id + "/command.list"):
         open("../servers/" + message.server.id + "/command.list", "w").close()
-    scl = open("../servers/" + message.server.id + "/command.list", "r+")
-    scls = scl.read().split(" ")
+    scl = open("../servers/" + message.server.id + "/command.list", "r+", encoding='utf-8')
+    scls = scl.read().split("\n")
 
     if not path.exists("../servers/" + message.server.id + "/serverconfig.ini"):
         serverconfig = open("../servers/" + message.server.id + "/serverconfig.ini", "w")
@@ -90,7 +93,7 @@ async def on_message(message):
     sconfig = ConfigParser()
     sconfig.read('../servers/' + message.server.id + '/serverconfig.ini')
     serverlang = sconfig.get('Config', 'lang')
-    langfile = open("../config/lang/" + serverlang + ".lang", "r")
+    langfile = open("../config/lang/" + serverlang + ".lang", "r", encoding='utf-8')
     lang = langfile.read().split("\n")
 
     # server prefix
@@ -98,29 +101,58 @@ async def on_message(message):
     sconfig.read('../servers/' + message.server.id + '/serverconfig.ini')
     sprefix = sconfig.get('Config', 'prefix')
     # message
-    if message.content.startswith(sprefix):
+    if message.content.startswith(sprefix) or message .content.startswith(prefix):
+        # empty command
+        if len(message.content) == 1:
+            return
         msg = ""
+        # % in command
         if """%""" in message.content:
             msg = lang[1]
             await client.send_message(message.channel, msg)
             return
         msgargs = message.content[1:].split(" ")
-        if msgargs[0].upper() in commandlist:
-            msg = ocommand(message, sprefix, prefix, ownerID, consol_prefix, log_prefix, client)
-            if msg == "clean":
-                def is_me(m):
-                        return m.author == client.user
-                deleted = await client.purge_from(message.channel, limit=50, check=is_me)
-                msg = lang[10] + " " + str(len(deleted)) + " " + lang[11]
-            if msg != "":
-                await client.send_message(message.channel, msg)
-            log(message, msg, log_prefix)
 
-        elif msgargs[0].upper() in scls:
-            msg = scommand(message, sprefix, log_prefix)
+        # original commands
+        skipcommand = ["reload", "pyprefix"]
+        if message.content.startswith(sprefix) and msgargs[0] not in skipcommand:
+            if msgargs[0] in commandlist:
+                msg = ocommand(message, sprefix, prefix, consol_prefix, log_prefix)
+                # clean command
+                if msg == "clean":
+                    def is_me(m):
+                            return m.author == client.user
+                    try:
+                        deleted = await client.purge_from(message.channel, limit=50, check=is_me)
+                        msg = lang[10] + " " + str(len(deleted)) + " " + lang[11]
+                    except:
+                        msg = lang[20]
+                #send message + log
+                if msg != "":
+                    await client.send_message(message.channel, msg)
+                    log(message, msg, log_prefix)
+            # server commands
+            elif msgargs[0] in scls:
+                msg = scommand(message, sprefix)
+                if msg != "":
+                    await client.send_message(message.channel, msg)
+                log(message, msg, log_prefix)
+
+        # fix prefix commands
+        elif message.content.startswith(prefix):
+            if message.content.startswith(prefix + "reload"):
+                if message.author.id == ownerID:
+                    reload(message, consol_prefix, log_prefix)
+            elif message.content.startswith(prefix + "pyhelp"):
+                msg = pyhelp(message, sprefix, prefix)
+            elif message.content.startswith(prefix + "pyprefix"):
+                msg = lang[37] + sprefix
+                #send message + log
             if msg != "":
                 await client.send_message(message.channel, msg)
-            log(message, msg, log_prefix)
+                log(message, msg, log_prefix)
+
+
 try:
     client.run(Token)
 except:

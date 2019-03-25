@@ -9,7 +9,7 @@ def setting(message):
 
     # open lang file
     serverlang = sconfig.get('Config', 'lang')
-    langfile = open("../config/lang/" + serverlang + ".lang", "r")
+    langfile = open("../config/lang/" + serverlang + ".lang", "r", encoding='utf-8')
     lang = langfile.read().split("\n")
 
     # settings command
@@ -25,8 +25,6 @@ def setting(message):
                 msg = lang[0] + " " + newprefix
             else:
                 msg = lang[2]
-        elif msgargs[1] == "showprefix":
-            msg = lang[3] + sconfig.get('Config', 'prefix')
         elif msgargs[1] == "lang":
             if len(msgargs) > 2:
                 if path.exists("../config/lang/" + msgargs[2] + ".lang"):
@@ -37,7 +35,7 @@ def setting(message):
                     file.close()
 
                     serverlang = sconfig.get('Config', 'lang')
-                    langfile = open("../config/lang/" + serverlang + ".lang", "r")
+                    langfile = open("../config/lang/" + serverlang + ".lang", "r", encoding='utf-8')
                     lang = langfile.read().split("\n")
 
                     msg = lang[4] + " " + msgargs[2]

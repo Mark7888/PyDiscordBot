@@ -1,12 +1,48 @@
 Prefix set to:
 Please don't use the '%' character in commands!
 Not enought arguments!
-The prefix is:
+Syntax:
 Language set to:
 There isn't
 lang file yet.
-Settings has no argument like this. Type 'pyhelp settings' for more information!
+Settings has no argument like this. Type 'pyhelp pysettings' for more information!
 You have not enought permission!
 This command is in progress.
 Deleted
 message(s)
+Wrong syntax. Please type 'pyhelp pyaddcommand' for more information!
+You must add 'name' and 'text' arguments! Please type 'pyhelp pyaddcommand' for more information!
+This command is already exist. Please chose an other name or set this with the 'pysetcommand' command.
+Command successfully created.
+This is a custom command.
+You have no commands yet.
+Commands:
+You mustn't use `?, /, <, >, |, *, "` characters in the command's name!
+This messages are too old to delete them.
+command
+Help for using the bot and the commands
+command name
+message
+description
+Add a new command to the bot
+Set an exist command
+Bot's settings
+Show the ownly created commands
+Remove an exist command
+Delete the bot messages
+new lang
+new prefix
+Set the bot prefix
+Set the bot language
+Eg.:
+Current prefix:
+Shows the current prefix
+You can't create a command with this name!
+You must add a 'text' or a 'description' argument to set the command!
+Command successfully set.
+There is no such command. You can create with the 'pyaddcommand' command.
+You must add a 'name'argument to set the command!
+You must add a 'name'argument to remove the command!
+There is no such command, so you can't remove it.
+Command successfully removed.
+You can use in command's name only letters or numbers!

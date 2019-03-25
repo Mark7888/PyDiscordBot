@@ -1,17 +1,18 @@
 from configparser import ConfigParser
 from os import makedirs, path
+from re import match
 def addcommand(message):
     # open lang file
     sconfig = ConfigParser()
     sconfig.read('../servers/' + message.server.id + '/serverconfig.ini')
     serverlang = sconfig.get('Config', 'lang')
-    langfile = open("../config/lang/" + serverlang + ".lang", "r")
+    langfile = open("../config/lang/" + serverlang + ".lang", "r", encoding='utf-8')
     lang = langfile.read().split("\n")
 
     msg = ""
     splits = {"description" : lang[16]}
-
-    arg = message.content[1:].split("&")
+    linemsg = message.content[1:].split("\n")
+    arg = linemsg[0].split("&")
     if len(arg) <= 1:
         msg = lang[2]
         return(msg)
@@ -48,22 +49,39 @@ def addcommand(message):
     if "text" not in splits or "name" not in splits:
         msg = lang[13]
         return(msg)
+    characters = ["/", "<", ">", "|", ":", '"', "*", "?"]
+    for char in characters:
+        if char in splits['name']:
+            msg = lang[19]
+            return(msg)
+    print(splits['name'])
+    if not match("^[A-Za-z0-9_-]*$", splits['name']):
+        msg = lang[47]
+        return(msg)
     # open command list file
-    commandlist = open('../servers/' + message.server.id + '/command.list', "r")
+    commandlist = open('../servers/' + message.server.id + '/command.list', "r", encoding='utf-8')
     commands = commandlist.read()
     list = commands.split("\n")
+    commandlist2 = open('../config/commands.list', "r", encoding='utf-8')
+    commands2 = commandlist2.read()
+    list2 = commands2.split(" ")
+    list2.append("reload")
+    list2.append("pyprefix")
 
     #create command
     if splits['name'] not in list:
-        if not path.exists('../servers/' + message.server.id + '/commands'):
-            makedirs('../servers/' + message.server.id + '/commands')
-        commandfile = open('../servers/' + message.server.id + '/commands/' + splits['name'] + ".command", "w")
-        commandfile.write(splits['description'] + '\n' + splits['text'] + '\n')
-        commandfile.close()
-        commandlist = open('../servers/' + message.server.id + '/command.list', "w")
-        commandlist.write(commands + splits['name'] + '\n')
-        commandlist.close()
-        msg = lang[15]
+        if splits['name'] not in list2:
+            if not path.exists('../servers/' + message.server.id + '/commands'):
+                makedirs('../servers/' + message.server.id + '/commands')
+            commandfile = open('../servers/' + message.server.id + '/commands/' + splits['name'] + ".command", "w", encoding='utf-8')
+            commandfile.write(splits['description'] + '\n' + splits['text'] + '\n')
+            commandfile.close()
+            commandlist = open('../servers/' + message.server.id + '/command.list', "w", encoding='utf-8')
+            commandlist.write(commands + splits['name'] + '\n')
+            commandlist.close()
+            msg = lang[15]
+        else:
+            msg = lang[39]
     else:
         msg = lang[14]
 

@@ -1,12 +1,48 @@
-Prefix beallitva:
-Kerlek ne hasznald a '%' karaktert parancsokban!
-Nincs eleg argumentum!
-A prefix:
-Nyelv beallitva a kovetkezore:
+Prefix beállítva:
+Kérlek ne használd a '%' karaktert parancsokban!
+Nincs elég argumentum!
+Szintaxis:
+Nyelv beállitva a következőre:
 Nincs
-nyelvi fajl jelenleg!
-Nincs ilyen beallitasi argumentum. ird be a 'pyhelp settings' parancsot a tovabbi informaciokert!
-Nincs jogod ennek a parancsnak a vegrehajtasahoz!
+nyelvi fájl jelenleg!
+Nincs ilyen beállitasi argumentum. Írd be a 'pyhelp pysettings' parancsot a további információkért!
+Nincs jogod a parancs végrehajtásához!
 Ez a parancs fejlesztés alatt áll.
-Torolve lett
-uzenet.
+Törölve lett
+üzenet.
+Helytelen szintaxis! Ird be a 'pyhelp pyaddcommand' parancsot a további információkért!
+Meg kell adnod egy 'name' és egy 'text' argumentumot a parancs létrehozásához. Írd be a 'pyhelp pyaddcommand' parancsot a további információkért!
+Ez a név már foglalt. Kérlek válassz egy másikat vagy változtasd meg ezt a 'pysetcommand' paranccsal!
+A parancs sikeresen létrehozva.
+Ez egy egyéni parancs.
+Még nincsenek parancsok.
+Parancsok:
+Nem használhatsz `?, /, <, >, |, *, "` karaktereket parancsok nevében!
+Ezek az üzenetek túl régiek hogy törölni lehessen őket.
+parancs
+Segit hasznalni a bot parancsait
+parancs neve
+uzenet
+leiras
+Egy uj parancsot ad a bothoz
+Megvaltoztat egy meglevo parancsot
+Bot beallitasai
+Kilistazza a sajat parancsokat
+Torol egy meglevo parancsot
+Torli a bot uzeneteit
+uj nyelv
+uj prefix
+Beallitja a bot prefixet
+Beallitja a bot nyelvet
+Pl.:
+Jelenlegi prefix:
+Megmutatja a jelenlegi prefixet
+Nem hozhatsz létre parancsot evvel a névvel!
+Meg kell adnod egy 'text' vagy egy 'description' argumentumot a parancs megváltoztatásához!
+Parancs sikeresen megváltoztatva.
+Nincs ilyen parancs. Létrehozhatsz parancsot a 'pyaddcommand' paranccsal.
+Meg kell adnod egy 'name' argumentumot a parancs módosításához!
+Meg kell adnod egy 'name' argumentumot a parancs eltávolításához!
+Nincs ilyen parancs ezért nem tudod eltávolítani.
+Parancs sikeresen törölve.
+Prancsok nevében csak számokat és betűket használhatsz!
