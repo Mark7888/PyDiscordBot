@@ -46,3 +46,4 @@ You must add a 'name'argument to remove the command!
 There is no such command, so you can't remove it.
 Command successfully removed.
 You can use in command's name only letters or numbers!
+You reached the limit of commands! Delete commands to create new!
