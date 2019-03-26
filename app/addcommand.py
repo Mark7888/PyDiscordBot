@@ -6,6 +6,7 @@ def addcommand(message):
     sconfig = ConfigParser()
     sconfig.read('../servers/' + message.server.id + '/serverconfig.ini')
     serverlang = sconfig.get('Config', 'lang')
+    serverlimit = sconfig.get('Config', 'limit')
     langfile = open("../config/lang/" + serverlang + ".lang", "r", encoding='utf-8')
     lang = langfile.read().split("\n")
 
@@ -68,6 +69,10 @@ def addcommand(message):
     list2.append("reload")
     list2.append("pyprefix")
 
+    # check command limit
+    if len(list) > serverlimit:
+        lang[48]
+    
     #create command
     if splits['name'] not in list:
         if splits['name'] not in list2:
