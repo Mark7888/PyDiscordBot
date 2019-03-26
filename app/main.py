@@ -80,7 +80,7 @@ async def on_message(message):
 
     if not path.exists("../servers/" + message.server.id + "/serverconfig.ini"):
         serverconfig = open("../servers/" + message.server.id + "/serverconfig.ini", "w")
-        serverconfig.write('''[Config]\nprefix = ''' + prefix + '''\nlang = EN''')
+        serverconfig.write('''[Config]\nprefix = ''' + prefix + '''\nlang = EN\nlimit=100''')
         serverconfig.close()
     sconfig = ConfigParser()
     sconfig.read("../servers/" + message.server.id + "/serverconfig.ini")
