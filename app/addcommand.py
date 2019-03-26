@@ -71,7 +71,8 @@ def addcommand(message):
 
     # check command limit
     if len(list) > serverlimit:
-        lang[48]
+        msg = lang[48]
+        return(msg)
     
     #create command
     if splits['name'] not in list:
