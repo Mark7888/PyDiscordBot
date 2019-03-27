@@ -32,15 +32,22 @@ if path.exists("../app.version"):
 # delete files
 if path.exists("../app"):
     system('rmdir /S /Q "{}"'.format("../app"))
-#if path.exists("../update"):
-    # system('rmdir /S /Q "{}"'.format("../update"))
+if path.exists("../update"):
+    system('rmdir /S /Q "{}"'.format("../update"))
 if path.exists("../config/lang"):
     system('rmdir /S /Q "{}"'.format("../config/lang"))
 if path.exists("../config/commands.list"):
     osremove("../config/commands.list")
+if path.exists("../app.version"):
+    osremove("../app.version")
 
 # copy new files
 copyfile("./BotUpdate/app", "../app")
-# copyfile("./BotUpdate/update", "../update")
+copyfile("./BotUpdate/update", "../update")
 copyfile("./BotUpdate/config/lang", "../config/lang")
 copy2("./BotUpdate/config/commands.list", "../config")
+copy2("./BotUpdate/app.version", "../app.version")
+
+# delete bot update folder
+if path.exists("./BotUpdate"):
+    system('rmdir /S /Q "{}"'.format("./BotUpdate"))
