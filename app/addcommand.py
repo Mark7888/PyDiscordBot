@@ -70,10 +70,10 @@ def addcommand(message):
     list2.append("pyprefix")
 
     # check command limit
-    if len(list) > serverlimit:
+    if len(list) > int(serverlimit):
         msg = lang[48]
         return(msg)
-    
+
     #create command
     if splits['name'] not in list:
         if splits['name'] not in list2:
