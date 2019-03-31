@@ -1,3 +1,4 @@
+import platform
 from shutil import copytree as copyfile
 from shutil import copy2
 from os import system, path
