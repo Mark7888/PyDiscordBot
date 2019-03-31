@@ -82,9 +82,9 @@ copy2("./BotUpdate/app.version", "../app.version")
 
 # delete bot update folder
 if path.exists("./BotUpdate"):
-    if systemname == "windows":
+    if systemsname == "windows":
         system('rmdir /S /Q "{}"'.format("./BotUpdate"))
-    elif systemname == "linux":
+    elif systemsname == "linux":
         system('sudo rm -rf ./BotUpdate')
 
 print(Fore.GREEN + "Bot successfully updated.")
