@@ -46,4 +46,8 @@ Meg kell adnod egy 'name' argumentumot a parancs eltávolításához!
 Nincs ilyen parancs ezért nem tudod eltávolítani.
 Parancs sikeresen törölve.
 Prancsok nevében csak számokat és betűket használhatsz!
-Elérted a parancslimitet! Törölj parancsokat a továbbiak létrehozásához!
+Elérted a maximális számú parancsot. Törölj parancsokat hogy létrehozhass újakat!
+Érvénytelen feljesztői rangazonosító!
+Feljlesztői rang sikeresen frissítve.
+rang
+Beállítja a fejlesztői rangot

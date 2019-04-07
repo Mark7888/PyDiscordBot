@@ -47,3 +47,7 @@ There is no such command, so you can't remove it.
 Command successfully removed.
 Use only letters or numbers in command's name!
 You reached the command limit! Delete commands to create new!
+Invalid developer role ID!
+Developer role successfully updated.
+role
+Set the developer role

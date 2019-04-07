@@ -1,3 +1,4 @@
+from re import match
 from os import path
 from configparser import ConfigParser
 def setting(message):
@@ -45,6 +46,25 @@ def setting(message):
                 msg = lang[2]
 
 
+        elif msgargs[1] == "developer":
+            if len(msgargs) > 2:
+                roleid = msgargs[2]
+                if len(roleid) > 5:
+                    roleid = roleid[3:len(roleid)-1]
+                else:
+                    msg = lang[49]
+                    return(msg)
+                if match("^[0-9&-]*$", roleid):
+                    file = open('../servers/' + message.server.id + '/serverconfig.ini', 'w')
+                    sconfig.set('Config', 'devrole', roleid)
+                    sconfig.write(file)
+                    file.close()
+                    msg = lang[50]
+                else:
+                    msg = lang[49]
+
+            else:
+                msg = lang[2]
         else:
             msg = lang[7]
     else:

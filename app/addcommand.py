@@ -55,7 +55,6 @@ def addcommand(message):
         if char in splits['name']:
             msg = lang[19]
             return(msg)
-    print(splits['name'])
     if not match("^[A-Za-z0-9_-]*$", splits['name']):
         msg = lang[47]
         return(msg)

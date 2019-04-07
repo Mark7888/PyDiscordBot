@@ -25,7 +25,7 @@ def pyhelp(message, sprefix, prefix):
   /* """ + lang[27] + """ */
 - """ + sprefix + """pyremovecommand name=<""" + lang[23] + """>
   /* """ + lang[30] + """ */
-- """ + sprefix + """pysettings prefix/lang
+- """ + sprefix + """pysettings prefix/lang/developer
   /* """ + lang[28] + """ */
 - """ + sprefix + """pycommandlist
   /* """ + lang[29] + """ */
@@ -70,6 +70,8 @@ def pyhelp(message, sprefix, prefix):
   /* """ + lang[34] + """ */
 """ + sprefix + """pysettings lang <""" + lang[32] + """>
   /* """ + lang[35] + """ */
+""" + sprefix + """pysettings developer @""" + lang[51] + """
+  /* """ + lang[52] + """ */
 ```"""
         return(msg)
     # commandlist

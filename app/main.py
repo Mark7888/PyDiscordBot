@@ -80,7 +80,7 @@ async def on_message(message):
 
     if not path.exists("../servers/" + message.server.id + "/serverconfig.ini"):
         serverconfig = open("../servers/" + message.server.id + "/serverconfig.ini", "w")
-        serverconfig.write('''[Config]\nprefix = ''' + prefix + '''\nlang = EN\nlimit=100''')
+        serverconfig.write('''[Config]\nprefix = ''' + prefix + '''\nlang = EN\nlimit=100\ndevrole=0''')
         serverconfig.close()
     sconfig = ConfigParser()
     sconfig.read("../servers/" + message.server.id + "/serverconfig.ini")
@@ -100,6 +100,8 @@ async def on_message(message):
     sconfig = ConfigParser()
     sconfig.read('../servers/' + message.server.id + '/serverconfig.ini')
     sprefix = sconfig.get('Config', 'prefix')
+    # get developer role
+    devrole = sconfig.get('Config', 'devrole')
     # message
     if message.content.startswith(sprefix) or message .content.startswith(prefix):
         # empty command
@@ -117,7 +119,7 @@ async def on_message(message):
         skipcommand = ["reload", "pyprefix"]
         if message.content.startswith(sprefix) and msgargs[0] not in skipcommand:
             if msgargs[0] in commandlist:
-                msg = ocommand(message, sprefix, prefix, consol_prefix, log_prefix)
+                msg = ocommand(message, sprefix, prefix, consol_prefix, log_prefix, devrole)
                 # clean command
                 if msg == "clean":
                     def is_me(m):
