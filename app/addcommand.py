@@ -11,13 +11,17 @@ def addcommand(message):
     lang = langfile.read().split("\n")
 
     msg = ""
-    splits = {"description" : lang[16]}
+    splits = {"description" : lang[16],
+    "rank" : '0'}
     linemsg = message.content[1:].split("\n")
     arg = linemsg[0].split("&")
     if len(arg) <= 1:
         msg = lang[2]
         return(msg)
     arg[0] = arg[0].split(" ")[1]
+
+
+
     # separate the command's arguments
     while len(arg) > 0:
         if arg[0].startswith("name"):
@@ -39,6 +43,14 @@ def addcommand(message):
         elif arg[0].startswith("text"):
             if arg[0][4] == "=":
                 splits['text'] = arg[0][5:]
+                arg = arg[1:]
+            else:
+                msg = lang[12]
+                return(msg)
+
+        elif arg[0].startswith("rank"):
+            if arg[0][4] == "=":
+                splits['rank'] = arg[0][5:]
                 arg = arg[1:]
             else:
                 msg = lang[12]
@@ -79,7 +91,7 @@ def addcommand(message):
             if not path.exists('../servers/' + message.server.id + '/commands'):
                 makedirs('../servers/' + message.server.id + '/commands')
             commandfile = open('../servers/' + message.server.id + '/commands/' + splits['name'] + ".command", "w", encoding='utf-8')
-            commandfile.write(splits['description'] + '\n' + splits['text'] + '\n')
+            commandfile.write(splits['description'] + '\n' + splits['text'] + '\n' + splits['rank'] + '\n')
             commandfile.close()
             commandlist = open('../servers/' + message.server.id + '/command.list', "w", encoding='utf-8')
             commandlist.write(commands + splits['name'] + '\n')

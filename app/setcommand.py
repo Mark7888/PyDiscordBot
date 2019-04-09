@@ -40,13 +40,22 @@ def set(message):
                 msg = lang[12]
                 return(msg)
 
+        elif arg[0].startswith("rank"):
+            if arg[0][4] == "=":
+                splits['rank'] = arg[0][5:]
+                arg = arg[1:]
+            else:
+                msg = lang[12]
+                return(msg)
+
         else:
             arg = arg[1:]
     # check the command's arguments
     if "name" not in splits:
         msg = lang[43]
         return(msg)
-    if "description" not in splits and "text" not in splits:
+
+    if "description" not in splits and "text" not in splits and "rank" not in splits:
         msg = lang[40]
         return(msg)
 
@@ -54,23 +63,28 @@ def set(message):
     commandlist = open('../servers/' + message.server.id + '/command.list', "r", encoding='utf-8')
     commands = commandlist.read()
     list = commands.split("\n")
-
     if splits['name'] in list:
         commandfile = open('../servers/' + message.server.id + '/commands/' + splits['name'] + ".command", "r", encoding='utf-8')
         old = commandfile.read().split("\n")
         command = {"description" : old[0],
         "text" : old[1]}
+        if len(old) > 2:
+            command["rank"] = old[2]
+        else:
+            command["rank"] = '0'
+
         if "description" in splits:
             command['description'] = splits['description']
-        elif "text" in splits:
+        if "text" in splits:
             command['text'] = splits['text']
-
-        new = command['description'] + "\n" + command['text'] + "\n"
+        if "rank" in splits:
+            command['rank'] = splits['rank']
+        new = command['description'] + "\n" + command['text'] + "\n" + command['rank'] + "\n"
         commandfile = open('../servers/' + message.server.id + '/commands/' + splits['name'] + ".command", "w", encoding='utf-8')
         commandfile.write(new)
         commandfile.close()
         msg = lang[41]
 
     else:
-        lang[42]
+        msg = lang[42]
     return(msg)

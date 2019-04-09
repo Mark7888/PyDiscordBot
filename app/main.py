@@ -79,8 +79,11 @@ async def on_message(message):
     scls = scl.read().split("\n")
 
     if not path.exists("../servers/" + message.server.id + "/serverconfig.ini"):
+        limit = 100
+        if message.server.owner.id == ownerID:
+            limit = 10000
         serverconfig = open("../servers/" + message.server.id + "/serverconfig.ini", "w")
-        serverconfig.write('''[Config]\nprefix = ''' + prefix + '''\nlang = EN\nlimit=100\ndevrole=0''')
+        serverconfig.write('''[Config]\nprefix = ''' + prefix + '''\nlang = EN\nlimit=''' + limit + '''\ndevrole=0''')
         serverconfig.close()
     sconfig = ConfigParser()
     sconfig.read("../servers/" + message.server.id + "/serverconfig.ini")
@@ -135,7 +138,7 @@ async def on_message(message):
                     log(message, msg, log_prefix)
             # server commands
             elif msgargs[0] in scls:
-                msg = scommand(message, sprefix)
+                msg = scommand(message, sprefix, devrole)
                 if msg != "":
                     await client.send_message(message.channel, msg)
                 log(message, msg, log_prefix)

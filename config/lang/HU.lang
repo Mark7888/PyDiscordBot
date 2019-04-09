@@ -38,7 +38,7 @@ Pl.:
 Jelenlegi prefix:
 Megmutatja a jelenlegi prefixet
 Nem hozhatsz létre parancsot evvel a névvel!
-Meg kell adnod egy 'text' vagy egy 'description' argumentumot a parancs megváltoztatásához!
+Meg kell adnod egy 'text', egy 'rank' vagy egy 'description' argumentumot a parancs megváltoztatásához!
 Parancs sikeresen megváltoztatva.
 Nincs ilyen parancs. Létrehozhatsz parancsot a 'pyaddcommand' paranccsal.
 Meg kell adnod egy 'name' argumentumot a parancs módosításához!
@@ -51,3 +51,4 @@ Elérted a maximális számú parancsot. Törölj parancsokat hogy létrehozhass
 Feljlesztői rang sikeresen frissítve.
 rang
 Beállítja a fejlesztői rangot
+rangazonosító

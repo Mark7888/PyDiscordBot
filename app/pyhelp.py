@@ -19,9 +19,9 @@ def pyhelp(message, sprefix, prefix):
 """ + lang[18] + """
 - """ + sprefix + """pyhelp [""" + lang[21] + """]
   /* """ + lang[22] + """ */
-- """ + sprefix + """pyaddcommand name=<""" + lang[23] + """>&text=<""" + lang[24] + """>[&description=<""" + lang[25] + """>]
+- """ + sprefix + """pyaddcommand name=<""" + lang[23] + """>&text=<""" + lang[24] + """>[&description=<""" + lang[25] + """>&rank=<""" + lang[53] + """>]
   /* """ + lang[26] + """ */
-- """ + sprefix + """pysetcommand name=<""" + lang[23] + """>[&text=<""" + lang[24] + """>&description=<""" + lang[25] + """>]
+- """ + sprefix + """pysetcommand name=<""" + lang[23] + """>[&text=<""" + lang[24] + """>&description=<""" + lang[25] + """>&rank=<""" + lang[53] + """>]
   /* """ + lang[27] + """ */
 - """ + sprefix + """pyremovecommand name=<""" + lang[23] + """>
   /* """ + lang[30] + """ */
@@ -39,9 +39,9 @@ def pyhelp(message, sprefix, prefix):
     # addcommand
     def addhelp(lang):
         msg = """ ```css
-- """ + sprefix + """pyaddcommand name=<""" + lang[23] + """>&text=<""" + lang[24] + """>[&description=<""" + lang[25] + """>]
+- """ + sprefix + """pyaddcommand name=<""" + lang[23] + """>&text=<""" + lang[24] + """>[&description=<""" + lang[25] + """>&rank=<""" + lang[53] + """>]
   /* """ + lang[26] + """ */
-""" + lang[36] + """ '""" + sprefix + """pyaddcommand name=bot&descriptoin=discord&text=python'
+""" + lang[36] + """ '""" + sprefix + """pyaddcommand name=bot&descriptoin=discord&text=python&rank=7888'
 ```"""
         return(msg)
     # removecommand
@@ -55,9 +55,9 @@ def pyhelp(message, sprefix, prefix):
     # setcommand
     def setcommandhelp(lang):
         msg = """ ```css
-- """ + sprefix + """pysetcommand name=<""" + lang[23] + """>[&text=<""" + lang[24] + """>&description=<""" + lang[25] + """>]
+- """ + sprefix + """pysetcommand name=<""" + lang[23] + """>[&text=<""" + lang[24] + """>&description=<""" + lang[25] + """>&rank=<""" + lang[53] + """>]
   /* """ + lang[27] + """ */
-""" + lang[36] + """ '""" + sprefix + """pysetcommand name=bot&text=python&descriptoin=discord'
+""" + lang[36] + """ '""" + sprefix + """pysetcommand name=bot&text=python&descriptoin=discord&rank=7888'
 ```"""
         return(msg)
     # settings
@@ -66,11 +66,11 @@ def pyhelp(message, sprefix, prefix):
 - """ + sprefix + """pysettings
   /* """ + lang[28] + """ */
 """ + lang[3] + """
-""" + sprefix + """pysettings prefix <""" + lang[33] + """>
+- """ + sprefix + """pysettings prefix <""" + lang[33] + """>
   /* """ + lang[34] + """ */
-""" + sprefix + """pysettings lang <""" + lang[32] + """>
+- """ + sprefix + """pysettings lang <""" + lang[32] + """>
   /* """ + lang[35] + """ */
-""" + sprefix + """pysettings developer @""" + lang[51] + """
+- """ + sprefix + """pysettings developer @""" + lang[51] + """
   /* """ + lang[52] + """ */
 ```"""
         return(msg)
