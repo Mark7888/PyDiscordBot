@@ -1,12 +1,6 @@
 from configparser import ConfigParser
 
-def scommand(message, sprefix, devrole):
-	# open lang file
-	sconfig = ConfigParser()
-	sconfig.read('../servers/' + message.server.id + '/serverconfig.ini')
-	serverlang = sconfig.get('Config', 'lang')
-	langfile = open("../config/lang/" + serverlang + ".lang", "r", encoding='utf-8')
-	lang = langfile.read().split("\n")
+def scommand(message, sprefix, devrole, lang):
 
     # message author roles
 	memberranks = []

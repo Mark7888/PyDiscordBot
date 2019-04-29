@@ -1,13 +1,7 @@
 from configparser import ConfigParser
 
-def set(message):
+def set(message, lang):
     msg = ""
-    # open lang file
-    sconfig = ConfigParser()
-    sconfig.read('../servers/' + message.server.id + '/serverconfig.ini')
-    serverlang = sconfig.get('Config', 'lang')
-    langfile = open("../config/lang/" + serverlang + ".lang", "r", encoding='utf-8')
-    lang = langfile.read().split("\n")
     splits = {}
     arg = message.content[1:].split("&")
     if len(arg) <= 1:

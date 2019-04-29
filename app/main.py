@@ -122,7 +122,7 @@ async def on_message(message):
         skipcommand = ["reload", "pyprefix"]
         if message.content.startswith(sprefix) and msgargs[0] not in skipcommand:
             if msgargs[0] in commandlist:
-                msg = ocommand(message, sprefix, prefix, consol_prefix, log_prefix, devrole)
+                msg = ocommand(message, sprefix, prefix, consol_prefix, log_prefix, devrole, lang)
                 # clean command
                 if msg == "clean":
                     def is_me(m):
@@ -138,7 +138,7 @@ async def on_message(message):
                     log(message, msg, log_prefix)
             # server commands
             elif msgargs[0] in scls:
-                msg = scommand(message, sprefix, devrole)
+                msg = scommand(message, sprefix, devrole, lang)
                 if msg != "":
                     await client.send_message(message.channel, msg)
                 log(message, msg, log_prefix)

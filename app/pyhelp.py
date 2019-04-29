@@ -3,13 +3,7 @@ from configparser import ConfigParser
 commandfile = open("../config/commands.list", "r+")
 commandlist = commandfile.read().split(" ")
 
-def pyhelp(message, sprefix, prefix):
-    # read the lang file
-    sconfig = ConfigParser()
-    sconfig.read('../servers/' + message.server.id + '/serverconfig.ini')
-    serverlang = sconfig.get('Config', 'lang')
-    langfile = open("../config/lang/" + serverlang + ".lang", "r", encoding='utf-8')
-    lang = langfile.read().split("\n")
+def pyhelp(message, sprefix, prefix, lang):
 
     msg = ""
     msgargs = message.content[1:].split(" ")

@@ -1,14 +1,7 @@
 from configparser import ConfigParser
 from os import makedirs, path
 from re import match
-def addcommand(message):
-    # open lang file
-    sconfig = ConfigParser()
-    sconfig.read('../servers/' + message.server.id + '/serverconfig.ini')
-    serverlang = sconfig.get('Config', 'lang')
-    serverlimit = sconfig.get('Config', 'limit')
-    langfile = open("../config/lang/" + serverlang + ".lang", "r", encoding='utf-8')
-    lang = langfile.read().split("\n")
+def addcommand(message, lang):
 
     msg = ""
     splits = {"description" : lang[16],

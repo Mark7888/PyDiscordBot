@@ -4,14 +4,8 @@ from os import path
 #if path.exists("<file_name>.txt"):
 #   removefile("<file_name>.txt")
 
-def remove(message):
+def remove(message, lang):
     msg = ""
-    # open lang file
-    sconfig = ConfigParser()
-    sconfig.read('../servers/' + message.server.id + '/serverconfig.ini')
-    serverlang = sconfig.get('Config', 'lang')
-    langfile = open("../config/lang/" + serverlang + ".lang", "r", encoding='utf-8')
-    lang = langfile.read().split("\n")
     splits = {}
     arg = message.content[1:].split("&")
     arg[0] = arg[0].split(" ")[1]

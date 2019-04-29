@@ -1,17 +1,12 @@
 from re import match
 from os import path
 from configparser import ConfigParser
-def setting(message):
+def setting(message, lang):
 
     # server config file
     msg = ""
     sconfig = ConfigParser()
     sconfig.read('../servers/' + message.server.id + '/serverconfig.ini')
-
-    # open lang file
-    serverlang = sconfig.get('Config', 'lang')
-    langfile = open("../config/lang/" + serverlang + ".lang", "r", encoding='utf-8')
-    lang = langfile.read().split("\n")
 
     # settings command
     msgargs = message.content[1:].split(" ")
