@@ -1,5 +1,3 @@
-from configparser import ConfigParser
-
 commandfile = open("../config/commands.list", "r+")
 commandlist = commandfile.read().split(" ")
 

@@ -13,7 +13,11 @@ def addcommand(message, lang):
         return(msg)
     arg[0] = arg[0].split(" ")[1]
 
-
+    # server config file
+    msg = ""
+    sconfig = ConfigParser()
+    sconfig.read('../servers/' + message.server.id + '/serverconfig.ini')
+    serverlimit = sconfig.get('Config', 'limit')
 
     # separate the command's arguments
     while len(arg) > 0:

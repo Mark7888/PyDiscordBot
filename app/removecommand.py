@@ -1,8 +1,6 @@
 from configparser import ConfigParser
 from os import remove as removefile
 from os import path
-#if path.exists("<file_name>.txt"):
-#   removefile("<file_name>.txt")
 
 def remove(message, lang):
     msg = ""

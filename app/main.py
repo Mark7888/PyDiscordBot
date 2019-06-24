@@ -83,7 +83,7 @@ async def on_message(message):
         if message.server.owner.id == ownerID:
             limit = 10000
         serverconfig = open("../servers/" + message.server.id + "/serverconfig.ini", "w")
-        serverconfig.write('''[Config]\nprefix = ''' + prefix + '''\nlang = EN\nlimit=''' + limit + '''\ndevrole=0''')
+        serverconfig.write('''[Config]\nprefix = ''' + prefix + '''\nlang = EN\nlimit=''' + str(limit) + '''\ndevrole=0''')
         serverconfig.close()
     sconfig = ConfigParser()
     sconfig.read("../servers/" + message.server.id + "/serverconfig.ini")
