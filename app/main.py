@@ -53,7 +53,7 @@ async def on_ready():
         open("../config/status.file", "w").close()
     else:
         print('\n' + Fore.GREEN + "Logged in as:")
-        print(Fore.CYAN + client.user.name + " <" + client.user.id + ">")
+        print(Fore.CYAN + client.user.name + " <" + str(client.user.id) + ">")
         print(Fore.GREEN + "---------------------------")
         print('\n' + Fore.RESET)
         stat.close()
