@@ -13,7 +13,7 @@ def ocommand(message, sprefix, prefix, consol_prefix, log_prefix,  devrole, lang
 	permissions = message.channel.permissions_for(message.author)
 
 	if message.content.startswith(sprefix + "pysettings"):
-		if permissions.administrator and str(message.author.id) == ownerID:# or devrole in memberranks:
+		if permissions.administrator or str(message.author.id) == ownerID:# or devrole in memberranks:
 			msg = (setting(message, lang))
 		else:
 			msg = lang[8]
@@ -24,25 +24,25 @@ def ocommand(message, sprefix, prefix, consol_prefix, log_prefix,  devrole, lang
 		msg = (commandlist(message, sprefix, lang))
 
 	elif message.content.startswith(sprefix + "pyclean"):
-		if permissions.manage_messages and str(message.author.id) == ownerID:# or devrole in memberranks:
+		if permissions.manage_messages or str(message.author.id) == ownerID:# or devrole in memberranks:
 			msg = "clean"
 		else:
 			msg = lang[8]
 
 	elif message.content.startswith(sprefix + "pyaddcommand"):
-		if permissions.administrator and str(message.author.id) == ownerID:# or devrole in memberranks:
+		if permissions.administrator or str(message.author.id) == ownerID:# or devrole in memberranks:
 			msg = (addcommand(message, lang))
 		else:
 			msg = lang[8]
 
 	elif message.content.startswith(sprefix + "pyremovecommand"):
-		if permissions.administrator and str(message.author.id) == ownerID:# or devrole in memberranks:
+		if permissions.administrator or str(message.author.id) == ownerID:# or devrole in memberranks:
 			msg = remove(message, lang)
 		else:
 			msg = lang[8]
 
 	elif message.content.startswith(sprefix + "pysetcommand"):
-		if permissions.administrator and str(message.author.id) == ownerID:# or devrole in memberranks:
+		if permissions.administrator or str(message.author.id) == ownerID:# or devrole in memberranks:
 			msg = set(message, lang)
 		else:
 			msg = lang[8]
