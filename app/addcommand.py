@@ -16,7 +16,7 @@ def addcommand(message, lang):
     # server config file
     msg = ""
     sconfig = ConfigParser()
-    sconfig.read('../servers/' + message.server.id + '/serverconfig.ini')
+    sconfig.read('../servers/' + str(message.guild.id) + '/serverconfig.ini')
     serverlimit = sconfig.get('Config', 'limit')
 
     # separate the command's arguments
@@ -68,7 +68,7 @@ def addcommand(message, lang):
         msg = lang[47]
         return(msg)
     # open command list file
-    commandlist = open('../servers/' + message.server.id + '/command.list', "r", encoding='utf-8')
+    commandlist = open('../servers/' + str(message.guild.id) + '/command.list', "r", encoding='utf-8')
     commands = commandlist.read()
     list = commands.split("\n")
     commandlist2 = open('../config/commands.list', "r", encoding='utf-8')
@@ -85,12 +85,12 @@ def addcommand(message, lang):
     #create command
     if splits['name'] not in list:
         if splits['name'] not in list2:
-            if not path.exists('../servers/' + message.server.id + '/commands'):
-                makedirs('../servers/' + message.server.id + '/commands')
-            commandfile = open('../servers/' + message.server.id + '/commands/' + splits['name'] + ".command", "w", encoding='utf-8')
+            if not path.exists('../servers/' + str(message.guild.id) + '/commands'):
+                makedirs('../servers/' + str(message.guild.id) + '/commands')
+            commandfile = open('../servers/' + str(message.guild.id) + '/commands/' + splits['name'] + ".command", "w", encoding='utf-8')
             commandfile.write(splits['description'] + '\n' + splits['text'] + '\n' + splits['rank'] + '\n')
             commandfile.close()
-            commandlist = open('../servers/' + message.server.id + '/command.list', "w", encoding='utf-8')
+            commandlist = open('../servers/' + str(message.guild.id) + '/command.list', "w", encoding='utf-8')
             commandlist.write(commands + splits['name'] + '\n')
             commandlist.close()
             msg = lang[15]

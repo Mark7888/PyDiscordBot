@@ -2,9 +2,9 @@ from configparser import ConfigParser
 from os import path
 
 def commandlist(message, sprefix, lang):
-    
+
     # commandlist
-    commands = open('../servers/' + message.server.id + '/command.list', "r")
+    commands = open('../servers/' + str(message.guild.id) + '/command.list', "r")
     list = commands.read()
     commandlist = list.split("\n")
     # list text
@@ -13,8 +13,8 @@ def commandlist(message, sprefix, lang):
 """ + lang[18]
         # commands description
         for desc in commandlist:
-            if path.exists('../servers/' + message.server.id + '/commands/' + desc + ".command"):
-                cdes = open('../servers/' + message.server.id + '/commands/' + desc + '.command', "r", encoding='utf-8')
+            if path.exists('../servers/' + str(message.guild.id) + '/commands/' + desc + ".command"):
+                cdes = open('../servers/' + str(message.guild.id) + '/commands/' + desc + '.command', "r", encoding='utf-8')
                 cdes = cdes.read().split("\n")
                 print("ok")
                 msg += '\n' + """

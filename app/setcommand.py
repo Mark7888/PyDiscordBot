@@ -54,11 +54,11 @@ def set(message, lang):
         return(msg)
 
     # open command list file
-    commandlist = open('../servers/' + message.server.id + '/command.list', "r", encoding='utf-8')
+    commandlist = open('../servers/' + str(message.guild.id) + '/command.list', "r", encoding='utf-8')
     commands = commandlist.read()
     list = commands.split("\n")
     if splits['name'] in list:
-        commandfile = open('../servers/' + message.server.id + '/commands/' + splits['name'] + ".command", "r", encoding='utf-8')
+        commandfile = open('../servers/' + str(message.guild.id) + '/commands/' + splits['name'] + ".command", "r", encoding='utf-8')
         old = commandfile.read().split("\n")
         command = {"description" : old[0],
         "text" : old[1]}
@@ -74,7 +74,7 @@ def set(message, lang):
         if "rank" in splits:
             command['rank'] = splits['rank']
         new = command['description'] + "\n" + command['text'] + "\n" + command['rank'] + "\n"
-        commandfile = open('../servers/' + message.server.id + '/commands/' + splits['name'] + ".command", "w", encoding='utf-8')
+        commandfile = open('../servers/' + str(message.guild.id) + '/commands/' + splits['name'] + ".command", "w", encoding='utf-8')
         commandfile.write(new)
         commandfile.close()
         msg = lang[41]

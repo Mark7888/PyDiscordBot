@@ -10,12 +10,12 @@ def log(message, msg, log_prefix):
     time = str(datetime.datetime.now())
     logtime = time[:len(time)-7]
     # console log
-    print(log_prefix + "Message from " + message.author.name + " <" + message.author.id + "> ")
+    print(log_prefix + "Message from " + message.author.name + " <" + str(message.author.id) + "> ")
     print(log_prefix + "Message: " + "'" + message.content + "'")
     print(log_prefix + "Sent message: " + "'" + msg + "'")
 
     # log file
-    logfile.write(logtime + " - Message from " + message.author.name + " <" + message.author.id + "> \n")
+    logfile.write(logtime + " - Message from " + message.author.name + " <" + str(message.author.id) + "> \n")
     logfile.write(logtime + " - Message: " + "'" + message.content + "'\n")
     logfile.write(logtime + " - Sent message: " + "'" + msg + "'\n")
     logfile.close()

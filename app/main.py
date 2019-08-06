@@ -57,7 +57,9 @@ async def on_ready():
         print(Fore.GREEN + "---------------------------")
         print('\n' + Fore.RESET)
         stat.close()
-    await client.change_presence(game=discord.Game(name='Type |' + prefix + 'pyhelp| for more information'))
+    # await client.change_presence(game=discord.Game(name='Type |' + prefix + 'pyhelp| for more information'))
+    game = discord.Game('Type |' + prefix + 'pyhelp| for more information')
+    await client.change_presence(status=discord.Status.idle, activity=game)
 
 # It runs if the bot get a message
 @client.event
@@ -66,42 +68,42 @@ async def on_message(message):
     if message.author == client.user:
         return
     # checks is the message in private
-    if message.channel.is_private:
-        return
+    #if message.channel.is_private:
+    #    return
 
     # create server folder
-    if not path.exists("../servers/" + message.server.id):
-        makedirs("../servers/" + message.server.id)
+    if not path.exists("../servers/" + str(message.guild.id)):
+        makedirs("../servers/" + str(message.guild.id))
 
-    if not path.exists("../servers/" + message.server.id + "/command.list"):
-        open("../servers/" + message.server.id + "/command.list", "w").close()
-    scl = open("../servers/" + message.server.id + "/command.list", "r+", encoding='utf-8')
+    if not path.exists("../servers/" + str(message.guild.id) + "/command.list"):
+        open("../servers/" + str(message.guild.id) + "/command.list", "w").close()
+    scl = open("../servers/" + str(message.guild.id) + "/command.list", "r+", encoding='utf-8')
     scls = scl.read().split("\n")
 
-    if not path.exists("../servers/" + message.server.id + "/serverconfig.ini"):
+    if not path.exists("../servers/" + str(message.guild.id) + "/serverconfig.ini"):
         limit = 100
-        if message.server.owner.id == ownerID:
+        if message.guild.owner.id == ownerID:
             limit = 10000
-        serverconfig = open("../servers/" + message.server.id + "/serverconfig.ini", "w")
+        serverconfig = open("../servers/" + str(message.guild.id) + "/serverconfig.ini", "w")
         serverconfig.write('''[Config]\nprefix = ''' + prefix + '''\nlang = EN\nlimit=''' + str(limit) + '''\ndevrole=0''')
         serverconfig.close()
     sconfig = ConfigParser()
-    sconfig.read("../servers/" + message.server.id + "/serverconfig.ini")
-    scfile = open("../servers/" + message.server.id + "/serverconfig.ini", "w")
-    sconfig.set('Config', 'servername', message.server.name)
+    sconfig.read("../servers/" + str(message.guild.id) + "/serverconfig.ini")
+    scfile = open("../servers/" + str(message.guild.id) + "/serverconfig.ini", "w")
+    sconfig.set('Config', 'servername', message.guild.name)
     sconfig.write(scfile)
     scfile.close()
 
     # open lang file
     sconfig = ConfigParser()
-    sconfig.read('../servers/' + message.server.id + '/serverconfig.ini')
+    sconfig.read('../servers/' + str(message.guild.id) + '/serverconfig.ini')
     serverlang = sconfig.get('Config', 'lang')
     langfile = open("../config/lang/" + serverlang + ".lang", "r", encoding='utf-8')
     lang = langfile.read().split("\n")
 
     # server prefix
     sconfig = ConfigParser()
-    sconfig.read('../servers/' + message.server.id + '/serverconfig.ini')
+    sconfig.read('../servers/' + str(message.guild.id) + '/serverconfig.ini')
     sprefix = sconfig.get('Config', 'prefix')
     # get developer role
     devrole = sconfig.get('Config', 'devrole')
@@ -114,7 +116,8 @@ async def on_message(message):
         # % in command
         if """%""" in message.content:
             msg = lang[1]
-            await client.send_message(message.channel, msg)
+            channel = message.channel
+            await channel.send(msg)
             return
         msgargs = message.content[1:].split(" ")
 
@@ -122,7 +125,7 @@ async def on_message(message):
         skipcommand = ["reload", "pyprefix"]
         if message.content.startswith(sprefix) and msgargs[0] not in skipcommand:
             if msgargs[0] in commandlist:
-                msg = ocommand(message, sprefix, prefix, consol_prefix, log_prefix, devrole, lang)
+                msg = ocommand(message, sprefix, prefix, consol_prefix, log_prefix, devrole, lang, ownerID)
                 # clean command
                 if msg == "clean":
                     def is_me(m):
@@ -134,19 +137,21 @@ async def on_message(message):
                         msg = lang[20]
                 #send message + log
                 if msg != "":
-                    await client.send_message(message.channel, msg)
+                    channel = message.channel
+                    await channel.send(msg)
                     log(message, msg, log_prefix)
             # server commands
             elif msgargs[0] in scls:
                 msg = scommand(message, sprefix, devrole, lang)
                 if msg != "":
-                    await client.send_message(message.channel, msg)
+                    channel = message.channel
+                    await channel.send(msg)
                 log(message, msg, log_prefix)
 
         # fix prefix commands
         elif message.content.startswith(prefix):
             if message.content.startswith(prefix + "reload"):
-                if message.author.id == ownerID:
+                if str(message.author.id) == ownerID:
                     reload(message, consol_prefix, log_prefix)
             elif message.content.startswith(prefix + "pyhelp"):
                 msg = pyhelp(message, sprefix, prefix)
@@ -154,7 +159,8 @@ async def on_message(message):
                 msg = lang[37] + sprefix
                 #send message + log
             if msg != "":
-                await client.send_message(message.channel, msg)
+                channel = message.channel
+                await channel.send(msg)
                 log(message, msg, log_prefix)
 
 

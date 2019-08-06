@@ -6,17 +6,14 @@ from setcommand import set
 from pyhelp import pyhelp
 from configparser import ConfigParser
 
-def ocommand(message, sprefix, prefix, consol_prefix, log_prefix,  devrole, lang):
-	
+def ocommand(message, sprefix, prefix, consol_prefix, log_prefix,  devrole, lang, ownerID):
+
 	msg = ""
 
-	# message author roles
-	memberranks = []
-	for allrank in message.author.roles:
-		memberranks.append(allrank.id)
+	permissions = message.channel.permissions_for(message.author)
 
 	if message.content.startswith(sprefix + "pysettings"):
-		if message.author.server_permissions.administrator or devrole in memberranks:
+		if permissions.administrator and str(message.author.id) == ownerID:# or devrole in memberranks:
 			msg = (setting(message, lang))
 		else:
 			msg = lang[8]
@@ -27,25 +24,25 @@ def ocommand(message, sprefix, prefix, consol_prefix, log_prefix,  devrole, lang
 		msg = (commandlist(message, sprefix, lang))
 
 	elif message.content.startswith(sprefix + "pyclean"):
-		if message.author.server_permissions.manage_messages or devrole in memberranks:
+		if permissions.manage_messages and str(message.author.id) == ownerID:# or devrole in memberranks:
 			msg = "clean"
 		else:
 			msg = lang[8]
 
 	elif message.content.startswith(sprefix + "pyaddcommand"):
-		if message.author.server_permissions.administrator or devrole in memberranks:
+		if permissions.administrator and str(message.author.id) == ownerID:# or devrole in memberranks:
 			msg = (addcommand(message, lang))
 		else:
 			msg = lang[8]
 
 	elif message.content.startswith(sprefix + "pyremovecommand"):
-		if message.author.server_permissions.administrator or devrole in memberranks:
+		if permissions.administrator and str(message.author.id) == ownerID:# or devrole in memberranks:
 			msg = remove(message, lang)
 		else:
 			msg = lang[8]
 
 	elif message.content.startswith(sprefix + "pysetcommand"):
-		if message.author.server_permissions.administrator or devrole in memberranks:
+		if permissions.administrator and str(message.author.id) == ownerID:# or devrole in memberranks:
 			msg = set(message, lang)
 		else:
 			msg = lang[8]
