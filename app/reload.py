@@ -1,4 +1,6 @@
 from subprocess import call
+import platform
+
 def reload(message, consol_prefix, log_prefix):
 	print(log_prefix + "Message from " + message.author.name + " <" + str(message.author.id) + "> ")
 	print(log_prefix + "Message: " + "'" + message.content + "'")
@@ -6,5 +8,8 @@ def reload(message, consol_prefix, log_prefix):
 	stat = open("../config/status.file", "w")
 	stat.write("RESTART")
 	stat.close()
-	call(['python', 'main.py'])
+	if platform.system() == "Windows":
+	    call(['python', 'main.py'])
+	else:
+		call(['python3', 'main.py'])
 	exit()

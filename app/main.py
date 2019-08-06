@@ -142,7 +142,7 @@ async def on_message(message):
                     log(message, msg, log_prefix)
             # server commands
             elif msgargs[0] in scls:
-                msg = scommand(message, sprefix, devrole, lang)
+                msg = scommand(message, sprefix, devrole, lang, ownerID)
                 if msg != "":
                     channel = message.channel
                     await channel.send(msg)
